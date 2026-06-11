@@ -31,26 +31,19 @@ function playRound(human, computer) {
     || (human === "Paper" && computer === "Stone")
     || (human === "Scissors" && computer === "Paper")) {
         humanScore++
-        return "Human wins"
+        return console.log("Human wins")
     } else if ((human === "Stone" && computer === "Paper") 
     || (human === "Paper" && computer === "Scissors")
     || (human === "Scissors" && computer === "Stone")) {
         computerScore++
-        return "Computer wins"
+        return console.log("Computer wins")
     } else if (human === computer) {
-        return "Draw"
+        return console.log("Draw")
     }
 }
 
-function playGame() {
+playRound(getHumanChoice(), getComputerChoice())
 
-    let round = 0
 
-    while (round < 6) {
-        console.log(playRound(getHumanChoice(), getComputerChoice()))
-        console.log("Human Score:" + humanScore + " Computer Score:" + computerScore)
-        round++
-    }
-}
-
-playGame()
+let stone = document.querySelector(".stone")
+stone.addEventListener('click', getHumanChoice)
