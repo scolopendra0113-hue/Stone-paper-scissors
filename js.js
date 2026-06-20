@@ -10,40 +10,51 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let humanChoice = prompt("Stone, scissors or paper").toLowerCase()
-    
-    if (humanChoice === "paper") {
-        return "Paper"
-    } else if (humanChoice === "stone") {
-        return "Stone"
-    } else if (humanChoice === "scissors") {
-        return "Scissors"
-    }
-}
+    let humanScore = 0
+    let computerScore = 0
 
-let humanScore = 0
-let computerScore = 0
+    let stone = document.querySelector(".stone")
+    let paper = document.querySelector(".paper")
+    let scissors = document.querySelector(".scissors")
+    let result = document.querySelector(".result")
+    let resultAll = document.querySelector(".resultAll")
 
-function playRound(human, computer) {
+
+
+function playRound(human) {
+
+    if (humanScore === 5 || computerScore === 5) return
+
+    const computer = getComputerChoice()
 
     if ((human === "Stone" && computer === "Scissors") 
     || (human === "Paper" && computer === "Stone")
     || (human === "Scissors" && computer === "Paper")) {
         humanScore++
-        return console.log("Human wins")
+        result.textContent = "You wins this round" + computerScore + humanScore
     } else if ((human === "Stone" && computer === "Paper") 
     || (human === "Paper" && computer === "Scissors")
     || (human === "Scissors" && computer === "Stone")) {
         computerScore++
-        return console.log("Computer wins")
+        result.textContent = "Computer wins this round" + computerScore + humanScore
     } else if (human === computer) {
-        return console.log("Draw")
+        result.textContent = "Draw" + computerScore + humanScore
     }
+
+    getResult()
 }
 
-playRound(getHumanChoice(), getComputerChoice())
+function getResult() {
+    if (humanScore === 5) {
+        resultAll.textContent = "you wins"
+    } else if (computerScore === 5) {
+        resultAll.textContent = "you lose"
+    } 
+}
 
 
-let stone = document.querySelector(".stone")
-stone.addEventListener('click', getHumanChoice)
+
+
+stone.addEventListener("click", () => playRound("Stone"))
+paper.addEventListener("click", () => playRound("Paper"))
+scissors.addEventListener("click", () => playRound("Scissors"))
